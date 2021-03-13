@@ -14,6 +14,8 @@ namespace CELL{
 		protected:
 		public:
 			INT(){
+				data = new int;
+				data = 0;
 				type = "int";
 			}
 			
@@ -24,6 +26,11 @@ namespace CELL{
 					return true;
 				}
 				return false;
+			}
+
+			std::ostream& operator<<(std::ostream& stream){
+				stream << (int) data;
+				return stream;
 			}
 	};
 };

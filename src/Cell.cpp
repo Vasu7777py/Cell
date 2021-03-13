@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[]){
 	CELL_info();
-	std::cout << "running Shell" << std::endl;
-	runShell();
+	CELL::INT integer;
+	std::cout << integer << std::endl;
 	return 0;
 }

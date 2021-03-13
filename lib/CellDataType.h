@@ -7,6 +7,7 @@
 #else
 #endif
 
+#include <iostream>
 #include <string>
 
 namespace CELL{
@@ -25,9 +26,11 @@ namespace CELL{
 				delete data;
 			}
 
-			std::string type(){
+			std::string getType(){
 				return type;
 			}
+
+			std::ostream& operator<<(std::ostream& stream){return stream;}
 	};
 };
 
