@@ -12,27 +12,23 @@ namespace CELL{
 	class INT : public DataType{
 		private:
 		protected:
+			int value;
 		public:
 			INT(){
-				data = new int;
-				data = 0;
+				value = 0;
+				data = &value;
 				type = "int";
 			}
 			
 			~INT(){}
 
-			bool isNAN(){
-				if (data == NULL){
-					return true;
-				}
-				return false;
-			}
-
-			std::ostream& operator<<(std::ostream& stream){
-				stream << (int) data;
-				return stream;
-			}
+			friend std::ostream& operator<<(std::ostream& stream, const INT& self);
 	};
+
+	std::ostream& operator<<(std::ostream& stream, const INT& self){
+		stream << *((int*) self.data);
+		return stream;
+	}
 };
 
 #endif

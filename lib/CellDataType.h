@@ -11,6 +11,9 @@
 #include <string>
 
 namespace CELL{
+
+	#define None "None"
+
 	class DataType{
 		private:
 		protected:
@@ -19,19 +22,36 @@ namespace CELL{
 		public:
 			DataType(){
 				data = NULL;
-				type = "";
+				type = "\0";
 			}
 
 			~DataType(){
-				delete data;
+				if(data != NULL)
+					delete data;
+			}
+
+			bool isNAN(){
+				if (data == NULL){
+					return true;
+				}
+				return false;
 			}
 
 			std::string getType(){
 				return type;
 			}
 
-			std::ostream& operator<<(std::ostream& stream){return stream;}
+			friend std::ostream& operator<<(std::ostream& stream, const DataType& self);
 	};
+
+	std::ostream& operator<<(std::ostream& stream, const DataType& self){
+		if(self.type == "\0"){
+			stream << None;
+			return stream;
+		}
+		// compile error handeling
+	}
+
 };
 
 #endif
