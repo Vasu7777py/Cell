@@ -11,7 +11,7 @@
 #include <string>
 
 namespace CELL{
-
+	
 	#define None "None"
 
 	class DataType{
@@ -19,37 +19,43 @@ namespace CELL{
 		protected:
 			void* data;
 			std::string type;
+			
 		public:
 			DataType(){
 				data = NULL;
 				type = "\0";
+				// std::cout << "creating base datype object" << std::endl;
 			}
 
-			~DataType(){
-				if(data != NULL)
-					delete data;
+			virtual ~DataType(){
+				// std::cout << "destroying base datype object" << std::endl;
 			}
 
-			bool isNAN(){
+			virtual bool isNAN(){
 				if (data == NULL){
 					return true;
 				}
 				return false;
 			}
 
-			std::string getType(){
+			virtual std::string getType(){
 				return type;
 			}
 
-			friend std::ostream& operator<<(std::ostream& stream, const DataType& self);
+			virtual std::string toString(){
+				return None;
+			}
+
+			friend std::ostream& operator<<(std::ostream& stream, DataType& self);
 	};
 
-	std::ostream& operator<<(std::ostream& stream, const DataType& self){
-		if(self.type == "\0"){
+	std::ostream& operator<<(std::ostream& stream, DataType& self){
+		if(self.getType() == "\0"){
 			stream << None;
 			return stream;
 		}
-		// compile error handeling
+		stream << self.toString();
+		return stream;
 	}
 
 };
