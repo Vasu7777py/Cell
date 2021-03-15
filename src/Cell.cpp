@@ -10,7 +10,7 @@ int main(int argc, char *argv[]){
 	std::cout << "------------------------------------------------------------------------" << std::endl;
 	CELL::INT integer = CELL::INT(std::stoi(argv[1]));
 	CELL::INT integer2 = CELL::INT(std::stoi(argv[3]));
-	CELL::INT integer3 = (integer + integer2);
+	CELL::INT integer3;
 	switch(argv[2][0]){
 		case '+':integer3 = integer + integer2;break;
 		case '-':integer3 = integer - integer2;break;
