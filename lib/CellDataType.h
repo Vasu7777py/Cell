@@ -10,6 +10,8 @@
 #include <iostream>
 #include <string>
 
+#include "CellState.h"
+
 namespace CELL{
 	
 	#define None "None"

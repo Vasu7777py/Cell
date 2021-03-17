@@ -7,6 +7,8 @@
 #else
 
 #include "CellInt.h"
+#include "CellFloat.h"
+#include "CellBool.h"
 
 #endif
 

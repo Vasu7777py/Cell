@@ -1,34 +1,29 @@
 
-#ifndef _CELL_INT_
-#define _CELL_INT_
-
-#ifndef __cplusplus
-#error
-#else
+#ifndef _CELL_FLOAT_
+#define _CELL_FLOAT_
 
 #include "CellState.h"
 #include "CellDataType.h"
 
 namespace CELL{
-	class INT : public DataType{
+	class FLOAT : public DataType{
 		private:
 		protected:
-			int value;
+			float value;
 		public:
-			INT(){
-				value = 0;
+			FLOAT(){
+				value = 0.0f;
 				data = &value;
-				type = "int";
+				type = "float";
 			}
 
-			INT(int value){
+			FLOAT(float value){
 				this->value = value;
-				data = &(this->value);
-				type = "int";
+				data = &value;
+				type = "float";
 			}
-			
-			~INT() override {
-			}
+
+			~FLOAT() override {}
 
 			std::string getType() override {
 				return type;
@@ -41,85 +36,82 @@ namespace CELL{
 				return false;
 			}
 
-			INT error(){
-				INT Error;
+			FLOAT error(){
+				FLOAT Error;
 				Error.data = NULL;
 				return Error;
 			}
 
-			INT operator+(INT& other) {
+			FLOAT operator+(FLOAT& other){
 				if(isNAN() || (other.isNAN())){
 					return this->error();
 				}
-				INT add;
+				FLOAT add;
 				add.value = this->value + other.value;
 				return add;
 			}
 
-			INT operator-(INT& other){
+			FLOAT operator-(FLOAT& other){
 				if(isNAN() || (other.isNAN())){
 					return this->error();
 				}
-				INT sub;
+				FLOAT sub;
 				sub.value = this->value - other.value;
 				return sub;
 			}
 
-			INT operator*(INT& other){
+			FLOAT operator*(FLOAT& other){
 				if(isNAN() || (other.isNAN())){
 					return this->error();
 				}
-				INT mul;
+				FLOAT mul;
 				mul.value = this->value * other.value;
 				return mul;
 			}
 
-			INT operator/(INT& other){
-				if(isNAN() || (other.isNAN()) || (other.isZero())){
+			FLOAT operator/(FLOAT& other){
+				if(isNAN() || other.isNAN() || other.isZero()){
 					return this->error();
 				}
-				INT div;
+				FLOAT div;
 				div.value = this->value / other.value;
 				return div;
 			}
 
-			INT operator%(INT& other){
-				if(isNAN() || (other.isNAN()) || (other.isZero())){
+			FLOAT operator%(FLOAT& other){
+				if(isNAN() || other.isNAN()  || other.isZero()){
 					return this->error();
 				}
-				INT mod;
-				mod.value = this->value % other.value;
+				FLOAT mod;
+				mod.value = this->value + other.value;
 				return mod;
 			}
 
-			void operator=(INT assig){
-				this->value = assig.value;
-				if(assig.data == NULL){
+			void operator=(FLOAT assign){
+				this->value = assign.value;
+				if(assign.data == NULL){
 					this->data = NULL;
 				}else{
 					this->data = &(this->value);
 				}
 			}
 
-			void operator=(int value){
+			void operator=(float value){
 				this->value = value;
 				this->data = &(this->value);
 			}
 
-			friend std::ostream& operator<<(std::ostream& stream, const INT& self);
+			friend std::ostream& operator<<(std::ostream& stream, const FLOAT& self);
 	};
 
-	std::ostream& operator<<(std::ostream& stream, const INT& self){
+	std::ostream& operator<<(std::ostream& stream, const FLOAT& self){
 		if(self.data == NULL){
 			stream << "NAN";
 		}else{
-			stream << *((int*) self.data);
+			stream << *((float *) self.data);
 		}
 		return stream;
 	}
 };
 
 #endif
-
-#endif
-

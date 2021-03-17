@@ -4,20 +4,16 @@
 
 int main(int argc, char *argv[]){
 	CELL_info();
-	if(argc != 4){
+	if(argc == 1){
+		runShell();
+	}else if(argc != 4){
+		for (int i = 0; i < argc; i++){
+			std::cout << argv[i] << std::endl;
+		}
 		return 0;
 	}
 	std::cout << "------------------------------------------------------------------------" << std::endl;
-	CELL::INT integer = CELL::INT(std::stoi(argv[1]));
-	CELL::INT integer2 = CELL::INT(std::stoi(argv[3]));
-	CELL::INT integer3;
-	switch(argv[2][0]){
-		case '+':integer3 = integer + integer2;break;
-		case '-':integer3 = integer - integer2;break;
-		case '*':integer3 = integer * integer2;break;
-		case '/':integer3 = integer / integer2;break;
-		case '%':integer3 = integer % integer2;break;
-	}
-	std::cout << integer << " " << argv[2] << " " << integer2 << " = " <<  integer3 << std::endl;
+	CELL::IF ifStatement = CELL::IF(1);
+	ifStatement();
 	return 0;
 }
